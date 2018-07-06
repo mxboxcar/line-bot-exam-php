@@ -19,11 +19,11 @@
         replyMsg($arrayHeader,$arrayPostData);
     }
 if (strpos($message, 'code=[') !== false) {
-	$exp = explode("code=[", $message);
+	preg_match_all( '#code=[(.+?)]#s' , $source, $match );
 	
 	$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = "ได้ทำการลงทะเบียนสำหรับโทรศัพท์เครื่องนี้แล้ว รหัสลูกค้าของคุณคือ ".$exp[1];
+        $arrayPostData['messages'][0]['text'] = "ได้ทำการลงทะเบียนสำหรับโทรศัพท์เครื่องนี้แล้ว รหัสลูกค้าของคุณคือ ".$match;
         replyMsg($arrayHeader,$arrayPostData);
 }
     #ตัวอย่าง Message Type "Sticker"
