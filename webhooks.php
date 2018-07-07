@@ -66,7 +66,7 @@ function replyMsg($arrayHeader,$arrayPostData){
 }
 
 function register($code, $uid) {
-    $strUrl = "https://portal.yd-cargo.com/_api/submit_lineman?code=".$code."&uid=".$uid."&token=1qw23er45t@";
+    $strUrl = "http://portal.yd-cargo.com/_api/submit_lineman?code=".$code."&uid=".$uid."&token=1qw23er45t@";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,$strUrl);
     curl_setopt($ch, CURLOPT_HEADER, false);
