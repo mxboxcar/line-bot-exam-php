@@ -25,15 +25,22 @@ YD-Cargo";
 if (strpos($message, 'code=[') !== false) {
 	$exp = explode('code=[' , $message);
 	$exp2 = explode(']', $exp[1]);
+    $uid = '';
 
-//register($exp2[0], $arrayJson['source']['userId'])
+    foreach ($arrayJson['events'] as $event) {
+        if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+            $uid = $event['source']['userId'];
+        }
+    }
+
+    //register($exp2[0], $arrayJson['source']['userId'])
 
 	$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
         $arrayPostData['messages'][0]['text'] = "
 ได้ทำการลงทะเบียนสำหรับโทรศัพท์เครื่องนี้แล้ว
 	
-รหัสลูกค้าของคุณคือ ".$exp2[0]."
+รหัสลูกค้าของคุณคือ ".$exp2[0].$uid."
 คุณจะได้รับการแจ้งเตือนจากระบบโดยอัตโนมัติผ่านช่องทาง Line นี้
 การตอบกลับ จะไม่สามารถทำได้ กรุณาตอบกลับที่ Line : @ydcargo
 คุณสามารถลงทะเบียนใหม่อีกครั้ง โดยพิมพ์ code=[รหัสลูกค้าของคุณ]
