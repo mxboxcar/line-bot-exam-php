@@ -32,7 +32,7 @@ if (strpos($message, 'code=[') !== false) {
     $sql = "SELECT * FROM `user` WHERE `code` = '".$exp2[0]."' ";
     $result = mysql_query($sql);
     $data = mysql_fetch_array($result);
-    CloseDB();
+
 
 
 	
@@ -41,7 +41,7 @@ if (strpos($message, 'code=[') !== false) {
         $arrayPostData['messages'][0]['text'] = "
 ได้ทำการลงทะเบียนสำหรับโทรศัพท์เครื่องนี้แล้ว
 	
-รหัสลูกค้าของคุณคือ ".$exp2[0].$data['id']."
+รหัสลูกค้าของคุณคือ ".$exp2[0].$sql."
 คุณจะได้รับการแจ้งเตือนจากระบบโดยอัตโนมัติผ่านช่องทาง Line นี้
 การตอบกลับ จะไม่สามารถทำได้ กรุณาตอบกลับที่ Line : @ydcargo
 คุณสามารถลงทะเบียนใหม่อีกครั้ง โดยพิมพ์ code=[รหัสลูกค้าของคุณ]
