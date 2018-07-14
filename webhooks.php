@@ -11,7 +11,7 @@ $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
 $message = $arrayJson['events'][0]['message']['text'];
 
-if($message == "help"){
+if(strtolower($message) == "help"){
     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
     $arrayPostData['messages'][0]['type'] = "text";
     $arrayPostData['messages'][0]['text'] = "คุณสามารถลงทะเบียนใหม่อีกครั้ง โดยพิมพ์ code=[รหัสลูกค้าของคุณ]
@@ -22,7 +22,7 @@ YD-Cargo";
     replyMsg($arrayHeader,$arrayPostData);
 }
 
-if (strpos($message, 'code=[') !== false) {
+if (strpos(strtolower($message), 'code=[') !== false) {
 	$exp = explode('code=[' , $message);
 	$exp2 = explode(']', $exp[1]);
     $uid = '';
@@ -66,7 +66,7 @@ function replyMsg($arrayHeader,$arrayPostData){
 }
 
 function register($code, $uid) {
-    $strUrl = "https://portal.yd-cargo.com/_api/submit_lineman?code=".$code."&uid=".$uid."&token=1qw23er45t@";
+    $strUrl = "http://portal.yd-cargo.com/_api/submit_lineman?code=".$code."&uid=".$uid."&token=1qw23er45t@";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,$strUrl);
     curl_setopt($ch, CURLOPT_HEADER, false);
