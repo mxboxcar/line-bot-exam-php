@@ -20,9 +20,7 @@ if(strtolower($message) == "help"){
 }
 
 if (strpos(strtolower($message), 'u"') !== false && strpos(strtolower($message), '"p"') !== false) {
-    // $exp = explode('u=[' , $message);
-    // $exp2 = explode(']p=[', $exp[1]);
- //    $exp3 = explode(']', $exp2[1]);
+
     $u = findu($message)[1][0];
     $p = findp($message)[1][0];
     $uid = '';
@@ -33,12 +31,6 @@ if (strpos(strtolower($message), 'u"') !== false && strpos(strtolower($message),
         }
     }
 
-
-// $d = register($u, $p, $uid);
-//     $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-//         $arrayPostData['messages'][0]['type'] = "text";
-//         $arrayPostData['messages'][0]['text'] = $d;
-//     replyMsg($arrayHeader,$arrayPostData);
 
     if(register($u, $p, $uid) == 1) {
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
