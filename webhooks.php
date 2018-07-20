@@ -11,13 +11,7 @@ $arrayHeader[] = "Authorization: Bearer {$accessToken}";
 
 $message = $arrayJson['events'][0]['message']['text'];
 
-if(strtolower($message) == "help"){
-    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-    $arrayPostData['messages'][0]['type'] = "text";
-    $arrayPostData['messages'][0]['text'] = "คุณสามารถลงทะเบียนใหม่อีกครั้ง โดยพิมพ์ u\"ชื่อเข้าใช้งาน\"p\"รหัสผ่าน\"
-สามารถลงทะเบียนใหม่ได้ตลอดเวลาหากต้องการเปลี่ยนโทรศัพท์หรือไลน์ไอดี";
-    replyMsg($arrayHeader,$arrayPostData);
-}
+
 
 if (strpos(strtolower($message), 'u"') !== false && strpos(strtolower($message), '"p"') !== false) {
 
@@ -53,7 +47,17 @@ if (strpos(strtolower($message), 'u"') !== false && strpos(strtolower($message),
 }
 
     
-}
+} else {
+    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+    $arrayPostData['messages'][0]['type'] = "text";
+    $arrayPostData['messages'][0]['text'] = "คุณสามารถลงทะเบียนใหม่อีกครั้ง โดยพิมพ์ u\"ชื่อเข้าใช้งาน\"p\"รหัสผ่าน\"
+พิมพ์ต่อกันเป็นบรรทัดเดียว
+สามารถลงทะเบียนใหม่ได้ตลอดเวลาหากต้องการเปลี่ยนโทรศัพท์หรือไลน์ไอดี
+
+หากไม่เเน่ใจเรื่องลงทะเบียนสอบถามได้ที่ข้อมูล @ydcargo";
+    replyMsg($arrayHeader,$arrayPostData);
+} 
+
 function findu($source) {
     preg_match_all( '#u"(.+?)"p"#s' , $source, $match );
     return $match;
